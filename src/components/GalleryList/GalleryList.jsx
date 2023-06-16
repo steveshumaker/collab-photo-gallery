@@ -1,11 +1,16 @@
+
 export function GalleryList({ pics }) {
+  console.log(pics);
+
+  if (pics.length === 0) {
+    return <p>Loading images...</p>;
+  }
+
   return (
-    <>
-      {pics.map((pic) => {
-        <div key={pic.id}>
-            <p>This should be a div</p>
-        </div>;
-      })}
-    </>
-  );
-};
+    <div>
+        {pics.map((pic) => {
+            <img src={goatPath} alt=""  />
+        })}
+    </div>
+    );
+}

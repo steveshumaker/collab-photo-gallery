@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React from "react";
+import { useState, useEffect } from "react";
 import { GalleryList } from "../GalleryList/GalleryList.jsx";
 import "./App.css";
 
 function App() {
   const [imageList, setImageList] = useState([]);
 
-  const getImages = () => {
+  function getImages() {
     fetch("/gallery")
       .then((response) => response.json())
       .then((images) => {
@@ -22,6 +22,7 @@ function App() {
   useEffect(() => {
     getImages();
   }, []);
+
 
   return (
     <div className="App">
