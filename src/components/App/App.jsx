@@ -17,12 +17,11 @@ function App() {
         console.error(error);
         throw new Error("Error!");
       });
-  };
+  }
 
   useEffect(() => {
     getImages();
   }, []);
-
 
   return (
     <div className="App">
