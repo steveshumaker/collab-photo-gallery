@@ -6,11 +6,16 @@ export function GalleryList({ pics, onLike }) {
   }
 
   return (
-    <div style={{flex: "flex", flexDirection: "row"}}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        gap: "1rem",
+        margin: ".5rem",
+      }}
+    >
       {pics.map((pic) => {
-        return (
-          <GalleryItem key={pic.id} pic={pic} onLike={onLike}/>
-        );
+        return <GalleryItem key={pic.id} pic={pic} onLike={onLike} />;
       })}
     </div>
   );

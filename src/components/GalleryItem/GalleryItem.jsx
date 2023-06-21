@@ -9,7 +9,6 @@ export function GalleryItem({ pic, onLike }) {
   };
 
   const addLike = (id) => {
-    console.log("id", id);
     fetch(`gallery/like/${id}`, {
       method: "PUT",
       headers: {
@@ -22,11 +21,19 @@ export function GalleryItem({ pic, onLike }) {
   };
 
   return (
-    <div key={pic.id}>
+    <div
+      key={pic.id}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       {imgDisplay ? (
         <img
           onClick={handleClick}
-          style={{ height: 100, width: 100 }}
+          style={{ height: "15em", width: "15em" }}
           src={pic.path}
           alt={pic.description}
         />
