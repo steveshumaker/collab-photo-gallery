@@ -7,7 +7,7 @@ const pool = require("../modules/pool.js");
 // PUT Route
 router.put("/like/:id", (req, res) => {
   const id = req.params.id;
-  const addLikeQuery = `UPDATE pictures SET likes=likes+1 WHERE id=$1`;
+  const addLikeQuery = `UPDATE pictures SET likes=likes+1 WHERE id=$1;`;
   pool
     .query(addLikeQuery, [id])
     .then((response) => {
@@ -23,7 +23,7 @@ router.put("/like/:id", (req, res) => {
 // GET Route
 router.get("/", (req, res) => {
   // res.send(galleryItems);
-  const getImagesQuery = `SELECT * FROM pictures ORDER BY id`;
+  const getImagesQuery = `SELECT * FROM pictures ORDER BY id;`;
   pool
     .query(getImagesQuery)
     .then((result) => {
@@ -36,5 +36,22 @@ router.get("/", (req, res) => {
       res.sendsStatus(500);
     });
 }); // END GET Route
+
+// POST Route
+router.post("/", (req, res) => {
+  const newImage = req.body;
+  const addImageQuery = `INSERT INTO pictures (path, description, likes) 
+                         VALUES ($1, $2, $3);`;
+
+  pool.query(addImageQuery, [newImage.path, newImage.description, 0])
+  .then((result) => {
+    res.sendStatus(201);
+  })
+  .catch((error) => {
+    alert(error);
+    console.error(error);
+    res.sendStatus(500);
+  })
+});
 
 module.exports = router;
