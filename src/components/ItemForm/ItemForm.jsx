@@ -33,7 +33,16 @@ export function ItemForm({ onPost }) {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          gap: ".5rem"
+        }}
+        onSubmit={handleSubmit}
+      >
+        <label htmlFor="url-inpur">Url:</label>
         <input
           onChange={(event) => setPath(event.target.value)}
           type="text"
@@ -41,11 +50,12 @@ export function ItemForm({ onPost }) {
           id="url-input"
           value={path}
         />
+        <label htmlFor="desc-input">Description:</label>
         <input
           onChange={(event) => setDescription(event.target.value)}
           type="text"
           placeholder="Description"
-          id="url-input"
+          id="desc-input"
           value={description}
         />
         <button type="submit">Submit Image</button>
