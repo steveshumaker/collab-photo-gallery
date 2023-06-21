@@ -1,36 +1,40 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-// const galleryItems = require('../modules/gallery.data');
-const pool = require('../modules/pool.js')
+const pool = require("../modules/pool.js");
 
 // DO NOT MODIFY THIS FILE FOR BASE MODE
 
 // PUT Route
-router.put('/like/:id', (req, res) => {
-    console.log(req.params);
-    const galleryId = req.params.id;
-    for(const galleryItem of galleryItems) {
-        if(galleryItem.id == galleryId) {
-            galleryItem.likes += 1;
-        }
-    }
-    res.sendStatus(200);
+router.put("/like/:id", (req, res) => {
+  const id = req.params.id;
+  const addLikeQuery = `UPDATE pictures SET likes=likes+1 WHERE id=$1`;
+  pool
+    .query(addLikeQuery, [id])
+    .then((response) => {
+      res.status(200).send(response.rows);
+    })
+    .catch((error) => {
+      alert(error);
+      console.error(error);
+      res.sendStatus(500);
+    });
 }); // END PUT Route
 
 // GET Route
-router.get('/', (req, res) => {
-    // res.send(galleryItems);
-    const getImagesQuery = `SELECT * FROM pictures`
-    pool.query(getImagesQuery)
+router.get("/", (req, res) => {
+  // res.send(galleryItems);
+  const getImagesQuery = `SELECT * FROM pictures ORDER BY id`;
+  pool
+    .query(getImagesQuery)
     .then((result) => {
-        console.log(result);
-        res.send(result.rows)
+      console.log(result);
+      res.send(result.rows);
     })
     .catch((error) => {
-        alert(error);
-        console.error(error);
-        res.sendsStatus(500);
-    })
+      alert(error);
+      console.error(error);
+      res.sendsStatus(500);
+    });
 }); // END GET Route
 
 module.exports = router;
