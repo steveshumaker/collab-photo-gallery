@@ -10,7 +10,6 @@ function App() {
     fetch("/gallery")
       .then((response) => response.json())
       .then((images) => {
-        // console.log(images);
         setImageList(images);
       })
       .catch((error) => {
@@ -28,9 +27,8 @@ function App() {
       <header className="App-header">
         <h1 className="App-title">Gallery of Steve's Life</h1>
       </header>
-      {/* <p>Gallery goes here</p>
-      <img src="images/goat_small.jpg" /> */}
-      <GalleryList pics={imageList} />
+
+      <GalleryList pics={imageList} onLike={getImages}/>
     </div>
   );
 }
