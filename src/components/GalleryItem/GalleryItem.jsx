@@ -20,6 +20,18 @@ export function GalleryItem({ pic, onLike }) {
     });
   };
 
+  const deleteImage = (id) => {
+    fetch(`gallery/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((response) => {
+      onLike();
+      console.log(response);
+    });
+  };
+
   return (
     <div
       key={pic.id}
@@ -42,6 +54,7 @@ export function GalleryItem({ pic, onLike }) {
       )}
       <span>Likes: {pic.likes}</span>
       <button onClick={() => addLike(pic.id)}>Like</button>
+      <button onClick={() => deleteImage(pic.id)}>Delete</button>
     </div>
   );
 }

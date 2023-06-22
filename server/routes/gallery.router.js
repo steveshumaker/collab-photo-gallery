@@ -54,4 +54,21 @@ router.post("/", (req, res) => {
   })
 });
 
+//DELETE Route
+router.delete("/:id", (req, res) => {
+    const id = req.params.id;
+    console.log('id: ', id);
+    const deleteQuery = `DELETE FROM pictures WHERE id=$1;`;
+    pool
+      .query(deleteQuery, [id])
+      .then((response) => {
+        res.sendStatus(200);
+      })
+      .catch((error) => {
+        alert(error);
+        console.error(error);
+        res.sendStatus(500);
+      });
+  }); // END PUT Route
+
 module.exports = router;
