@@ -14,7 +14,6 @@ router.put("/like/:id", (req, res) => {
       res.status(200).send(response.rows);
     })
     .catch((error) => {
-      alert(error);
       console.error(error);
       res.sendStatus(500);
     });
@@ -31,7 +30,6 @@ router.get("/", (req, res) => {
       res.send(result.rows);
     })
     .catch((error) => {
-      alert(error);
       console.error(error);
       res.sendsStatus(500);
     });
@@ -43,32 +41,31 @@ router.post("/", (req, res) => {
   const addImageQuery = `INSERT INTO pictures (path, description, likes) 
                          VALUES ($1, $2, $3);`;
 
-  pool.query(addImageQuery, [newImage.path, newImage.description, 0])
-  .then((result) => {
-    res.sendStatus(201);
-  })
-  .catch((error) => {
-    alert(error);
-    console.error(error);
-    res.sendStatus(500);
-  })
+  pool
+    .query(addImageQuery, [newImage.path, newImage.description, 0])
+    .then((result) => {
+      res.sendStatus(201);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.sendStatus(500);
+    });
 });
 
 //DELETE Route
 router.delete("/:id", (req, res) => {
-    const id = req.params.id;
-    console.log('id: ', id);
-    const deleteQuery = `DELETE FROM pictures WHERE id=$1;`;
-    pool
-      .query(deleteQuery, [id])
-      .then((response) => {
-        res.sendStatus(200);
-      })
-      .catch((error) => {
-        alert(error);
-        console.error(error);
-        res.sendStatus(500);
-      });
-  }); // END PUT Route
+  const id = req.params.id;
+  console.log("id: ", id);
+  const deleteQuery = `DELETE FROM pictures WHERE id=$1;`;
+  pool
+    .query(deleteQuery, [id])
+    .then((response) => {
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.sendStatus(500);
+    });
+}); // END PUT Route
 
 module.exports = router;

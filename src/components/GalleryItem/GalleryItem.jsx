@@ -1,5 +1,11 @@
 import React from "react";
 import { useState } from "react";
+import Card from "@mui/material/Card";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import Button from "@mui/material/Button";
 
 export function GalleryItem({ pic, onLike }) {
   const [imgDisplay, setImgDisplay] = useState(true);
@@ -33,28 +39,30 @@ export function GalleryItem({ pic, onLike }) {
   };
 
   return (
-    <div
-      key={pic.id}
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      {imgDisplay ? (
-        <img
-          onClick={handleClick}
-          style={{ height: "15em", width: "15em" }}
-          src={pic.path}
-          alt={pic.description}
+    <div key={pic.id}>
+      <Card sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
+        <CardMedia
+          component="div"
+          sx={{
+            // 16:9
+            pt: "56.25%",
+          }}
+          image={pic.path}
         />
-      ) : (
-        <p onClick={handleClick}>{pic.description}</p>
-      )}
-      <span>Likes: {pic.likes}</span>
-      <button onClick={() => addLike(pic.id)}>Like</button>
-      <button onClick={() => deleteImage(pic.id)}>Delete</button>
+        <CardContent sx={{ flexGrow: 1 }}>
+          <Typography>{pic.description}</Typography>
+          <hr />
+          <Typography>Likes: {pic.likes}</Typography>
+        </CardContent>
+        <CardActions>
+          <Button onClick={() => addLike(pic.id)} size="small">
+            Like
+          </Button>
+          <Button onClick={() => deleteImage(pic.id)} size="small">
+            Delete
+          </Button>
+        </CardActions>
+      </Card>
     </div>
   );
 }
