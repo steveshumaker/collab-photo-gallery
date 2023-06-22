@@ -1,7 +1,10 @@
 import React from "react";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
+
 
 export function ItemForm({ onPost }) {
+  const history = useHistory();
   const [path, setPath] = useState("");
   const [description, setDescription] = useState("");
 
@@ -23,6 +26,7 @@ export function ItemForm({ onPost }) {
         setPath("");
         setDescription("");
         onPost();
+        history.push('/');
       })
       .catch((error) => {
         alert(error);
@@ -30,6 +34,10 @@ export function ItemForm({ onPost }) {
         res.sendStatus(500);
       });
   };
+
+  const returnToHome = () => {
+    history.push('/');
+  }
 
   return (
     <div>
@@ -60,6 +68,7 @@ export function ItemForm({ onPost }) {
         />
         <button type="submit">Submit Image</button>
       </form>
+      <button onClick={returnToHome}>Return</button>
     </div>
   );
 }
