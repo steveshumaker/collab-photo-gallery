@@ -34,8 +34,8 @@ function App() {
   }
 
   const goToForm = () => {
-    history.push('/entry');
-  }
+    history.push("/entry");
+  };
 
   useEffect(() => {
     getImages();
@@ -51,7 +51,7 @@ function App() {
               <Toolbar>
                 <CameraIcon sx={{ mr: 2 }} />
                 <Typography variant="h6" color="inherit" noWrap>
-                  Gallery of Steve's Life
+                  Steve's Image Gallery
                 </Typography>
               </Toolbar>
             </AppBar>
@@ -72,7 +72,7 @@ function App() {
                     color="text.primary"
                     gutterBottom
                   >
-                    Steve's Pics
+                    Pics Around the World
                   </Typography>
                   <Typography
                     variant="h5"
@@ -80,8 +80,10 @@ function App() {
                     color="text.secondary"
                     paragraph
                   >
-                    A gallery of images from my life, things I like, and other
-                    things along those lines. Enjoy!
+                    A gallery of images from my life, your life, things people
+                    enjoy. Feel free to click on 'Add a Picture!' to add your
+                    own image. Please be respectful of others with the images
+                    you choose - thank you!
                   </Typography>
                   <Stack
                     sx={{ pt: 4 }}
@@ -89,7 +91,9 @@ function App() {
                     spacing={2}
                     justifyContent="center"
                   >
-                    <Button variant="contained"><Link to="/entry">Add a picture!</Link></Button>
+                    <Button variant="contained">
+                      <Link to="/entry">Add a picture!</Link>
+                    </Button>
                   </Stack>
                 </Container>
               </Box>
